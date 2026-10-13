@@ -63,7 +63,7 @@ class TransferReportExportController extends Controller
     {
         $translationKey = match ($status) {
             'phone-confirm' => 'phone_confirm',
-            'pending', 'checking', 'success', 'failed' => $status,
+            'pending', 'checking', 'success', 'complete', 'failed' => $status,
             default => null,
         };
 

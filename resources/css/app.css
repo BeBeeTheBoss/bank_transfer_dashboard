@@ -168,6 +168,7 @@ button { color: inherit; }
 .status-badge { width: fit-content; display: inline-flex; align-items: center; gap: 6px; padding: 5px 8px; border: 1px solid currentColor; border-radius: 4px; font-size: 9px; font-weight: 800; text-transform: uppercase; white-space: nowrap; }
 .status-badge::before { content: ''; width: 4px; height: 4px; border-radius: 50%; background: currentColor; }
 .status-badge.success { color: #438f52; background: #f6fbf5; }
+.status-badge.complete { color: #287a68; background: #f1faf7; }
 .status-badge.pending { color: var(--amber); background: #fffaf0; }
 .status-badge.checking { color: #397f9b; background: #f3f9fb; }
 .status-badge.phone-confirm { color: var(--purple); background: #faf7ff; }

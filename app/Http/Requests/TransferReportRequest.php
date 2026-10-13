@@ -25,7 +25,7 @@ class TransferReportRequest extends FormRequest
         return [
             'search' => ['nullable', 'string', 'max:100'],
             'branch' => ['nullable', 'string', 'max:100'],
-            'status' => ['nullable', 'in:pending,checking,phone-confirm,success,failed'],
+            'status' => ['nullable', 'in:pending,checking,phone-confirm,success,complete,failed'],
             'date_from' => ['nullable', 'date'],
             'date_to' => ['nullable', 'date', 'after_or_equal:date_from'],
             'response_time' => ['nullable', 'in:under_5m,over_5m'],

@@ -64,7 +64,7 @@ function UserFormModal({ currentUserId, onClose, user, userTypes }) {
 }
 
 function formatDate(value, locale) {
-    return new Intl.DateTimeFormat(locale === 'my' ? 'my-MM' : 'en-GB', { day: '2-digit', month: 'short', year: 'numeric' }).format(new Date(value));
+    return new Intl.DateTimeFormat({ my: 'my-MM', th: 'th-TH' }[locale] || 'en-GB', { day: '2-digit', month: 'short', year: 'numeric' }).format(new Date(value));
 }
 
 export default function UserIndex({ users, userTypes }) {

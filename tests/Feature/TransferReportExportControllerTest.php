@@ -34,7 +34,7 @@ class TransferReportExportControllerTest extends TestCase
                 'requested_at' => '2026-10-10 15:49:37',
                 'responded_at' => '2026-10-10 15:52:37',
                 'transfer_amount' => '230800',
-                'status' => 'success',
+                'status' => 'complete',
                 'responded_username' => 'Admin',
                 'remark' => '=unsafe formula',
                 'requested_screenshot' => 'https://example.test/request.jpg',
@@ -69,6 +69,7 @@ class TransferReportExportControllerTest extends TestCase
         $this->assertStringContainsString('Transaction No.', $content);
         $this->assertStringContainsString('276866544947', $content);
         $this->assertStringContainsString('Yangon', $content);
+        $this->assertStringContainsString('Complete', $content);
         $this->assertStringContainsString('180', $content);
         $this->assertStringContainsString("'=unsafe formula", $content);
         $this->assertStringNotContainsString('999999999999', $content);

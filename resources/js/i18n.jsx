@@ -34,6 +34,7 @@ export function LocaleSwitcher({ className = '' }) {
             >
                 <option value="my">{t('language.my')}</option>
                 <option value="en">{t('language.en')}</option>
+                <option value="th">{t('language.th')}</option>
             </select>
         </label>
     );

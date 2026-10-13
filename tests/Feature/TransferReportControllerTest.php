@@ -93,6 +93,24 @@ class TransferReportControllerTest extends TestCase
                 ->where('translations.status.phone_confirm', 'ဖုန်းဖြင့် အတည်ပြုနေသည်'));
     }
 
+    public function test_complete_status_filter_is_accepted(): void
+    {
+        $user = User::factory()->create();
+        config(['database.connections.reports' => [
+            'driver' => 'sqlite',
+            'database' => ':memory:',
+            'prefix' => '',
+        ]]);
+
+        $this->actingAs($user)
+            ->get(route('reports.index', ['status' => 'complete']))
+            ->assertOk()
+            ->assertInertia(fn (Assert $page): Assert => $page
+                ->component('Reports/Index')
+                ->where('filters.status', 'complete')
+                ->where('translations.status.complete', 'ပြီးစီးသည်'));
+    }
+
     public function test_page_number_must_be_a_positive_integer(): void
     {
         $user = User::factory()->create();

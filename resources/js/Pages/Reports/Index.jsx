@@ -38,7 +38,7 @@ function formatDateParts(value, locale) {
 
     const [, year, month, day, hour, minute, second = '00'] = parts;
     const date = new Date(Date.UTC(Number(year), Number(month) - 1, Number(day), Number(hour), Number(minute), Number(second)));
-    const language = locale === 'my' ? 'my-MM' : 'en-GB';
+    const language = { my: 'my-MM', th: 'th-TH' }[locale] || 'en-GB';
     const timeZone = 'UTC';
 
     return {
@@ -53,7 +53,7 @@ function formatDate(value, locale) {
 }
 
 function formatNumber(value, locale) {
-    return new Intl.NumberFormat(locale === 'my' ? 'my-MM' : 'en-US').format(value);
+    return new Intl.NumberFormat({ my: 'my-MM', th: 'th-TH' }[locale] || 'en-US').format(value);
 }
 
 function formatMoney(value, locale) {
@@ -63,7 +63,7 @@ function formatMoney(value, locale) {
 
     if (normalized === '' || !Number.isFinite(amount)) return String(value).trim() || '—';
 
-    return new Intl.NumberFormat(locale === 'my' ? 'my-MM' : 'en-US', { maximumFractionDigits: 2 }).format(amount);
+    return new Intl.NumberFormat({ my: 'my-MM', th: 'th-TH' }[locale] || 'en-US', { maximumFractionDigits: 2 }).format(amount);
 }
 
 function DataSkeleton({ className = '' }) {
@@ -358,7 +358,7 @@ function DetailDrawer({ canRespond, record, locale, labels, onApiSuccess, onClos
 export default function ReportIndex({ records, summary, branches = [], filters, databaseError }) {
     const { auth, permissions } = usePage().props;
     const { locale, t } = useTranslations();
-    const statusLabels = { pending: t('status.pending'), checking: t('status.checking'), 'phone-confirm': t('status.phone_confirm'), success: t('status.success'), failed: t('status.failed') };
+    const statusLabels = { pending: t('status.pending'), checking: t('status.checking'), 'phone-confirm': t('status.phone_confirm'), success: t('status.success'), complete: t('status.complete'), failed: t('status.failed') };
     const canRespond = permissions?.respondToTransfers === true;
     const canExport = permissions?.exportTransferReports === true;
     const roleLabel = auth.user?.type === 'admin' ? t('report.admin_role') : auth.user?.type === 'viewer' ? t('report.viewer_role') : t('report.user_role');

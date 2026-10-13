@@ -5,6 +5,7 @@ return [
         'label' => 'Language',
         'my' => 'မြန်မာ',
         'en' => 'English',
+        'th' => 'ไทย',
     ],
     'navigation' => [
         'reports' => 'Reports',
@@ -152,6 +153,7 @@ return [
         'checking' => 'Checking',
         'phone_confirm' => 'Phone Confirm',
         'success' => 'Success',
+        'complete' => 'Complete',
         'failed' => 'Failed',
     ],
     'time' => [

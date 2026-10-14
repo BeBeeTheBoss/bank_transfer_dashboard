@@ -18,14 +18,14 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $admin = User::query()->firstOrNew([
-            'email' => env('ADMIN_EMAIL', 'admin@example.com'),
+            'email' => env('ADMIN_EMAIL', 'admin@pro1.com'),
         ]);
 
         $admin->name = env('ADMIN_NAME', 'Administrator');
         $admin->type = UserType::Admin;
 
         if (! $admin->exists) {
-            $admin->password = Hash::make(env('ADMIN_PASSWORD', 'change-me-now'));
+            $admin->password = Hash::make(env('ADMIN_PASSWORD', '11111111'));
         }
 
         $admin->save();

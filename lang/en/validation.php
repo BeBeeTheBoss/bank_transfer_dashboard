@@ -25,6 +25,7 @@ return [
         'string' => 'The :attribute must be at least :min characters.',
     ],
     'attributes' => [
+        'emp_code' => 'employee code',
         'name' => 'name',
         'email' => 'email address',
         'password' => 'password',

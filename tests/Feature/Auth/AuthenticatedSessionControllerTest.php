@@ -25,7 +25,7 @@ class AuthenticatedSessionControllerTest extends TestCase
         ]);
 
         $this->post(route('login'), [
-            'email' => $user->email,
+            'emp_code' => $user->emp_code,
             'password' => 'correct-password',
         ])->assertRedirect(route('reports.index'));
 
@@ -39,10 +39,10 @@ class AuthenticatedSessionControllerTest extends TestCase
         ]);
 
         $this->from(route('login'))->post(route('login'), [
-            'email' => $user->email,
+            'emp_code' => $user->emp_code,
             'password' => 'wrong-password',
         ])->assertRedirect(route('login'))->assertSessionHasErrors([
-            'email' => 'အီးမေးလ် သို့မဟုတ် စကားဝှက် မှားနေပါသည်။',
+            'emp_code' => 'ဝန်ထမ်းကုဒ် သို့မဟုတ် စကားဝှက် မှားနေပါသည်။',
         ]);
 
         $this->assertGuest();

@@ -19,7 +19,7 @@ class UserController extends Controller
     {
         return Inertia::render('Admin/Users/Index', [
             'users' => User::query()
-                ->select(['id', 'name', 'email', 'type', 'created_at'])
+                ->select(['id', 'name', 'emp_code', 'type', 'created_at'])
                 ->orderBy('name')
                 ->orderBy('id')
                 ->paginate(15),

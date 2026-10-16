@@ -45,14 +45,14 @@ class UserControllerTest extends TestCase
         $this->actingAs($user)
             ->post(route('admin.users.store'), [
                 'name' => 'New User',
-                'email' => 'new@example.com',
+                'emp_code' => 'EMP-NEW-01',
                 'password' => 'password-123',
                 'password_confirmation' => 'password-123',
                 'type' => UserType::Admin->value,
             ])
             ->assertForbidden();
 
-        $this->assertDatabaseMissing('users', ['email' => 'new@example.com']);
+        $this->assertDatabaseMissing('users', ['emp_code' => 'EMP-NEW-01']);
     }
 
     public function test_admin_sees_paginated_users(): void
@@ -78,7 +78,7 @@ class UserControllerTest extends TestCase
         $this->actingAs($admin)
             ->post(route('admin.users.store'), [
                 'name' => 'Read Only Viewer',
-                'email' => 'viewer@example.com',
+                'emp_code' => 'EMP-VIEW-01',
                 'password' => 'password-123',
                 'password_confirmation' => 'password-123',
                 'type' => UserType::Viewer->value,
@@ -86,7 +86,7 @@ class UserControllerTest extends TestCase
             ->assertRedirect()
             ->assertSessionHas('success');
 
-        $viewer = User::query()->where('email', 'viewer@example.com')->firstOrFail();
+        $viewer = User::query()->where('emp_code', 'EMP-VIEW-01')->firstOrFail();
 
         $this->assertSame(UserType::Viewer, $viewer->type);
     }
@@ -98,7 +98,7 @@ class UserControllerTest extends TestCase
         $this->actingAs($admin)
             ->post(route('admin.users.store'), [
                 'name' => 'Operations Admin',
-                'email' => 'operations@example.com',
+                'emp_code' => 'EMP-OPS-01',
                 'password' => 'password-123',
                 'password_confirmation' => 'password-123',
                 'type' => UserType::Admin->value,
@@ -106,7 +106,7 @@ class UserControllerTest extends TestCase
             ->assertRedirect()
             ->assertSessionHas('success', 'အသုံးပြုသူကို အောင်မြင်စွာ ဖန်တီးပြီးပါပြီ။');
 
-        $createdUser = User::query()->where('email', 'operations@example.com')->firstOrFail();
+        $createdUser = User::query()->where('emp_code', 'EMP-OPS-01')->firstOrFail();
 
         $this->assertSame('Operations Admin', $createdUser->name);
         $this->assertSame(UserType::Admin, $createdUser->type);
@@ -123,7 +123,7 @@ class UserControllerTest extends TestCase
             ->assertRedirect(route('admin.users.index'))
             ->assertSessionHasErrors([
                 'name' => 'အမည် ကို ဖြည့်သွင်းရန် လိုအပ်ပါသည်။',
-                'email' => 'အီးမေးလ် ကို ဖြည့်သွင်းရန် လိုအပ်ပါသည်။',
+                'emp_code' => 'ဝန်ထမ်းကုဒ် ကို ဖြည့်သွင်းရန် လိုအပ်ပါသည်။',
                 'password' => 'စကားဝှက် ကို ဖြည့်သွင်းရန် လိုအပ်ပါသည်။',
                 'type' => 'အသုံးပြုသူအမျိုးအစား ကို ဖြည့်သွင်းရန် လိုအပ်ပါသည်။',
             ]);
@@ -137,7 +137,7 @@ class UserControllerTest extends TestCase
             ->from(route('admin.users.index'))
             ->post(route('admin.users.store'), [
                 'name' => 'Invalid Role',
-                'email' => 'invalid@example.com',
+                'emp_code' => 'EMP-INVALID-01',
                 'password' => 'password-123',
                 'password_confirmation' => 'password-123',
                 'type' => 'super-admin',
@@ -147,7 +147,7 @@ class UserControllerTest extends TestCase
                 'type' => 'ရွေးချယ်ထားသော အသုံးပြုသူအမျိုးအစား သည် မမှန်ကန်ပါ။',
             ]);
 
-        $this->assertDatabaseMissing('users', ['email' => 'invalid@example.com']);
+        $this->assertDatabaseMissing('users', ['emp_code' => 'EMP-INVALID-01']);
     }
 
     public function test_admin_updates_user_without_changing_password(): void
@@ -159,7 +159,7 @@ class UserControllerTest extends TestCase
         $this->actingAs($admin)
             ->put(route('admin.users.update', $user), [
                 'name' => 'Updated Name',
-                'email' => 'updated@example.com',
+                'emp_code' => 'EMP-UPDATED-01',
                 'password' => '',
                 'password_confirmation' => '',
                 'type' => UserType::Admin->value,
@@ -170,7 +170,7 @@ class UserControllerTest extends TestCase
         $user->refresh();
 
         $this->assertSame('Updated Name', $user->name);
-        $this->assertSame('updated@example.com', $user->email);
+        $this->assertSame('EMP-UPDATED-01', $user->emp_code);
         $this->assertSame(UserType::Admin, $user->type);
         $this->assertSame($originalPassword, $user->password);
     }
@@ -183,7 +183,7 @@ class UserControllerTest extends TestCase
             ->from(route('admin.users.index'))
             ->put(route('admin.users.update', $admin), [
                 'name' => $admin->name,
-                'email' => $admin->email,
+                'emp_code' => $admin->emp_code,
                 'password' => '',
                 'password_confirmation' => '',
                 'type' => UserType::User->value,

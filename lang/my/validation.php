@@ -25,6 +25,7 @@ return [
         'string' => ':attribute သည် အနည်းဆုံး စာလုံးရေ :min ရှိရပါမည်။',
     ],
     'attributes' => [
+        'emp_code' => 'ဝန်ထမ်းကုဒ်',
         'email' => 'အီးမေးလ်',
         'password' => 'စကားဝှက်',
         'password_confirmation' => 'စကားဝှက် အတည်ပြုချက်',

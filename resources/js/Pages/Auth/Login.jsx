@@ -12,7 +12,7 @@ function Mark() {
 export default function Login() {
     const { t } = useTranslations();
     const { data, setData, post, processing, errors } = useForm({
-        email: '',
+        emp_code: '',
         password: '',
         remember: false,
     });
@@ -39,13 +39,13 @@ export default function Login() {
 
                     <form onSubmit={submit} className="login-form">
                         <label>
-                            <span>{t('login.email')}</span>
+                            <span>{t('login.emp_code')}</span>
                             <input
-                                type="email"
-                                value={data.email}
-                                onChange={(event) => setData('email', event.target.value)}
-                                placeholder={t('login.email_placeholder')}
-                                autoComplete="email"
+                                type="text"
+                                value={data.emp_code}
+                                onChange={(event) => setData('emp_code', event.target.value)}
+                                placeholder={t('login.emp_code_placeholder')}
+                                autoComplete="username"
                                 autoFocus
                                 required
                             />
@@ -61,7 +61,7 @@ export default function Login() {
                                 required
                             />
                         </label>
-                        {errors.email && <p className="form-error" role="alert">{errors.email}</p>}
+                        {errors.emp_code && <p className="form-error" role="alert">{errors.emp_code}</p>}
                         <label className="remember-row">
                             <input type="checkbox" checked={data.remember} onChange={(event) => setData('remember', event.target.checked)} />
                             <span>{t('login.remember')}</span>

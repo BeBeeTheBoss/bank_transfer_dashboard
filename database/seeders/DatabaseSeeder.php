@@ -17,10 +17,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $admin = User::query()->firstOrNew([
-            'email' => env('ADMIN_EMAIL', 'admin@pro1.com'),
-        ]);
+        $empCode = env('ADMIN_EMP_CODE', '000-000000');
+        $legacyEmail = env('ADMIN_EMAIL', 'admin@pro1.com');
+        $admin = User::query()->where('emp_code', $empCode)->first()
+            ?? User::query()->where('email', $legacyEmail)->first()
+            ?? new User;
 
+        $admin->emp_code = $empCode;
         $admin->name = env('ADMIN_NAME', 'Administrator');
         $admin->type = UserType::Admin;
 

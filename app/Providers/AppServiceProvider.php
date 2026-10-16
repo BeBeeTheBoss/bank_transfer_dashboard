@@ -30,7 +30,7 @@ class AppServiceProvider extends ServiceProvider
         Gate::define('export-transfer-reports', fn (User $user): bool => $user->canOperateTransfers());
 
         RateLimiter::for('login', function (Request $request): Limit {
-            $key = Str::transliterate(Str::lower($request->string('email')->toString()).'|'.$request->ip());
+            $key = Str::transliterate(Str::lower($request->string('emp_code')->toString()).'|'.$request->ip());
 
             return Limit::perMinute(5)->by($key);
         });

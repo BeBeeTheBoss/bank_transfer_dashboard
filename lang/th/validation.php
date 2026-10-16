@@ -25,6 +25,7 @@ return [
         'string' => ':attribute ต้องมีอย่างน้อย :min ตัวอักษร',
     ],
     'attributes' => [
+        'emp_code' => 'รหัสพนักงาน',
         'name' => 'ชื่อ',
         'email' => 'อีเมล',
         'password' => 'รหัสผ่าน',
